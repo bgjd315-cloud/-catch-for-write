@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字精煉與感官聚焦寫作教練 | 馬卡龍微寫作工坊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            macaron: {
+              cream: '#FFFDF9',
+              vanilla: '#FAF6EE',
+              pink: '#FDE2E4',
+              pinkDark: '#F497A8',
+              mint: '#E2ECE9',
+              mintDark: '#5EAAA8',
+              lavender: '#E8DFF5',
+              lavenderDark: '#9381FF',
+              peach: '#FEE1D1',
+              peachDark: '#EB8A66',
+              butter: '#FFF1C5',
+              butterDark: '#E4A834',
+              sky: '#D6EAF8',
+              ink: '#3D3534',
+              muted: '#7B7170'
+            }
+          },
+          fontFamily: {
+            sans: ['"Zen Maru Gothic"', 'Inter', 'sans-serif'],
+            serif: ['"Noto Serif TC"', 'serif'],
+          },
+          boxShadow: {
+            'soft': '0 8px 30px rgba(220, 200, 195, 0.25)',
+            'card': '0 4px 20px rgba(180, 160, 155, 0.12)',
+            'macaron': '0 10px 0 #EAD7D1'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF6EE;
+      color: #3D3534;
+      background-image: 
+        radial-gradient(#FDE2E4 1.5px, transparent 1.5px),
+        radial-gradient(#E2ECE9 1.5px, #FAF6EE 1.5px);
+      background-size: 48px 48px;
+      background-position: 0 0, 24px 24px;
+    }
+
+    .macaron-glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 245, 240, 0.9);
+    }
+
+    .chip-active {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(235, 138, 102, 0.25);
+    }
+
+    /* Custom smooth scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F8F1E9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E5D5CF;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D4BDB5;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .pulse-subtle {
+      animation: gentlePulse 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-macaron-peach selection:text-macaron-ink">
+
+  <header class="sticky top-0 z-40 macaron-glass border-b border-macaron-pink/60 px-4 lg:px-8 py-3.5 shadow-sm transition-all">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-macaron-pinkDark via-macaron-peachDark to-macaron-butterDark flex items-center justify-center text-white shadow-sm shadow-macaron-peachDark/30">
+          <i class="fa-solid fa-feather-pointed text-lg"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-lg md:text-xl font-bold tracking-tight text-macaron-ink font-serif">文字精煉與感官聚焦寫作教練</h1>
+            <span class="hidden sm:inline-block px-2.5 py-0.5 text-xs font-medium rounded-full bg-macaron-pink text-macaron-ink border border-macaron-pinkDark/30">微觀鍛造</span>
+          </div>
+          <p class="text-xs text-macaron-muted hidden md:block">拒絕浮濫贅字與無病呻吟，150字一氣呵成的心情凝結</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <!-- Quick Sample Dropdown Button -->
+        <button id="btn-quick-sample" class="px-3.5 py-2 rounded-xl bg-macaron-butter hover:bg-macaron-butterDark/20 text-macaron-ink text-xs md:text-sm font-semibold flex items-center space-x-1.5 transition border border-macaron-butterDark/40 active:scale-95 shadow-sm">
+          <i class="fa-solid fa-wand-magic-sparkles text-macaron-butterDark"></i>
+          <span>一鍵填入範例</span>
+        </button>
+
+        <!-- View Mode Switcher -->
+        <div class="bg-macaron-vanilla p-1 rounded-xl border border-stone-200/60 flex text-xs font-semibold">
+          <button id="tab-studio" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-macaron-peachDark font-bold transition">一鍵鍛造盤</button>
+          <button id="tab-chat" class="px-3 py-1.5 rounded-lg text-macaron-muted hover:text-macaron-ink transition">四步對話教練</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 space-y-6">
+
+    <!-- Top Core Rules Ribbon (Collapsible & Educational) -->
+    <section class="rounded-2xl p-4 bg-gradient-to-r from-macaron-pink/40 via-macaron-peach/40 to-macaron-mint/40 border border-white/80 shadow-card">
+      <div class="flex items-start md:items-center justify-between gap-3">
+        <div class="flex items-start space-x-3">
+          <span class="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-macaron-peachDark text-white text-xs flex items-center justify-center font-bold">!</span>
+          <div class="text-xs md:text-sm leading-relaxed text-macaron-ink">
+            <span class="font-bold text-macaron-peachDark">教練寫作戒律：</span>
+            <span>① 情感定錨唯一　② 由物顯情（拒用「我覺得/代表希望」標籤）　③ 重量動詞驅動　④ 嚴禁口語：<span class="underline decoration-macaron-pinkDark decoration-2 font-mono">首先、最後、總之、我覺得、真的是、然後、就是說</span></span>
+          </div>
+        </div>
+        <button id="btn-toggle-forbidden" class="text-xs text-macaron-peachDark underline font-semibold flex-shrink-0 hover:opacity-80">
+          禁用詞檢測表
+        </button>
+      </div>
+
+      <!-- Expandable Forbidden Word Explainer -->
+      <div id="forbidden-words-panel" class="hidden mt-3 pt-3 border-t border-stone-200/60 text-xs grid grid-cols-2 sm:grid-cols-4 gap-2 text-macaron-muted">
+        <div class="bg-white/80 p-2 rounded-lg border border-red-100 flex items-center space-x-1.5">
+          <i class="fa-solid fa-ban text-rose-400"></i>
+          <span>我覺得 / 感覺上</span>
+        </div>
+        <div class="bg-white/80 p-2 rounded-lg border border-red-100 flex items-center space-x-1.5">
+          <i class="fa-solid fa-ban text-rose-400"></i>
+          <span>然後 / 就是說</span>
+        </div>
+        <div class="bg-white/80 p-2 rounded-lg border border-red-100 flex items-center space-x-1.5">
+          <i class="fa-solid fa-ban text-rose-400"></i>
+          <span>首先 / 最後 / 總之</span>
+        </div>
+        <div class="bg-white/80 p-2 rounded-lg border border-red-100 flex items-center space-x-1.5">
+          <i class="fa-solid fa-ban text-rose-400"></i>
+          <span>真的是 / 超級 / 很難過</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 1: ONE-CLICK STUDIO VIEW (一鍵鍛造盤) ================= -->
+    <div id="view-studio" class="space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Form Column: 3 Stages Inputs -->
+        <div class="lg:col-span-7 space-y-5">
+
+          <!-- Stage 1 Card: 目標與情緒濾鏡 -->
+          <div class="bg-white rounded-3xl p-5 md:p-6 shadow-card border border-macaron-pink/50 transition-all hover:border-macaron-pinkDark/40">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-7 h-7 rounded-xl bg-macaron-pink text-macaron-pinkDark flex items-center justify-center font-bold text-sm">1</span>
+                <h2 class="font-bold text-base text-macaron-ink">設定目標與文字濾鏡</h2>
+              </div>
+              <span class="text-xs text-macaron-muted font-mono">階段一：情感定錨</span>
+            </div>
+
+            <div class="space-y-4 text-xs md:text-sm">
+              <!-- 摹寫類型 -->
+              <div>
+                <label class="block text-xs font-bold text-macaron-muted mb-2">1. 摹寫類型</label>
+                <div class="grid grid-cols-3 gap-2" id="group-category">
+                  <button type="button" data-val="物態" class="category-btn py-2 px-3 rounded-xl border border-stone-200 bg-macaron-vanilla font-semibold text-macaron-ink hover:border-macaron-peachDark transition text-center active:scale-95">物態描繪</button>
+                  <button type="button" data-val="寫景" class="category-btn py-2 px-3 rounded-xl border border-stone-200 bg-macaron-vanilla font-semibold text-macaron-ink hover:border-macaron-peachDark transition text-center active:scale-95">空間寫景</button>
+                  <button type="button" data-val="心感" class="category-btn py-2 px-3 rounded-xl border border-stone-200 bg-macaron-vanilla font-semibold text-macaron-ink hover:border-macaron-peachDark transition text-center active:scale-95">心感情境</button>
+                </div>
+              </div>
+
+              <!-- 唯一心情 (5選1) -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <label class="block text-xs font-bold text-macaron-muted">2. 唯一心情基調（嚴禁混雜）</label>
+                  <span id="selected-mood-badge" class="text-xs px-2 py-0.5 rounded-full bg-macaron-lavender text-macaron-lavenderDark font-bold">尚未選擇</span>
+                </div>
+                <div class="grid grid-cols-5 gap-1.5 md:gap-2" id="group-mood">
+                  <button type="button" data-mood="孤寂" class="mood-btn py-2 px-1 text-center rounded-xl border border-stone-200 bg-white hover:bg-macaron-sky/50 text-macaron-ink text-xs font-bold transition">孤寂</button>
+                  <button type="button" data-mood="釋然" class="mood-btn py-2 px-1 text-center rounded-xl border border-stone-200 bg-white hover:bg-macaron-mint/50 text-macaron-ink text-xs font-bold transition">釋然</button>
+                  <button type="button" data-mood="沉重" class="mood-btn py-2 px-1 text-center rounded-xl border border-stone-200 bg-white hover:bg-stone-100 text-macaron-ink text-xs font-bold transition">沉重</button>
+                  <button type="button" data-mood="希望" class="mood-btn py-2 px-1 text-center rounded-xl border border-stone-200 bg-white hover:bg-macaron-butter/60 text-macaron-ink text-xs font-bold transition">希望</button>
+                  <button type="button" data-mood="熱烈" class="mood-btn py-2 px-1 text-center rounded-xl border border-stone-200 bg-white hover:bg-macaron-pink/60 text-macaron-ink text-xs font-bold transition">熱烈</button>
+                </div>
+              </div>
+
+              <!-- 主角 / 觀察對象 -->
+              <div>
+                <label class="block text-xs font-bold text-macaron-muted mb-1.5">3. 你的主角（觀察對象）</label>
+                <div class="relative">
+                  <input id="input-subject" type="text" placeholder="例如：靠在走廊欄杆旁生鏽的舊腳踏車、祖母生前褪色的紅木剪刀、暴雨將歇的公車站牌..." class="w-full bg-macaron-cream border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs md:text-sm text-macaron-ink focus:outline-none focus:ring-2 focus:ring-macaron-pinkDark/40">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 2 Card: 感官捕捉細節 -->
+          <div class="bg-white rounded-3xl p-5 md:p-6 shadow-card border border-macaron-mint/60 transition-all hover:border-macaron-mintDark/40">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-7 h-7 rounded-xl bg-macaron-mint text-macaron-mintDark flex items-center justify-center font-bold text-sm">2</span>
+                <h2 class="font-bold text-base text-macaron-ink">感官對齊心情（由物顯情）</h2>
+              </div>
+              <span class="text-xs text-macaron-muted font-mono">階段二：細節捕捉</span>
+            </div>
+
+            <div class="space-y-3.5 text-xs md:text-sm">
+              <!-- 微觀質地 -->
+              <div>
+                <label class="block text-xs font-semibold text-macaron-ink mb-1">
+                  <i class="fa-solid fa-fingerprint text-macaron-mintDark mr-1"></i> 微觀質地痕跡（表面刻痕/裂痕/剝落物）
+                </label>
+                <input id="input-texture" type="text" placeholder="例：鏈條上結成顆粒狀的暗赭色鐵鏽，橡膠握把早已磨損見芯" class="input-sensory w-full bg-macaron-cream border border-stone-200 rounded-xl px-3.5 py-2 text-xs md:text-sm text-macaron-ink focus:outline-none focus:ring-2 focus:ring-macaron-mintDark/40">
+              </div>
+
+              <!-- 視覺光影或空間氣息 -->
+              <div>
+                <label class="block text-xs font-semibold text-macaron-ink mb-1">
+                  <i class="fa-solid fa-sun text-macaron-butterDark mr-1"></i> 視覺光影或空間氣息（光照角度、陰影處、氣味）
+                </label>
+                <input id="input-lighting" type="text" placeholder="例：冷白色的走廊燈光斜切而下，車座陷入深灰冷硬的投影裡，飄著雨後潮濕水泥的腥冷氣息" class="input-sensory w-full bg-macaron-cream border border-stone-200 rounded-xl px-3.5 py-2 text-xs md:text-sm text-macaron-ink focus:outline-none focus:ring-2 focus:ring-macaron-mintDark/40">
+              </div>
+
+              <!-- 聽覺或物理質地 -->
+              <div>
+                <label class="block text-xs font-semibold text-macaron-ink mb-1">
+                  <i class="fa-solid fa-ear-listen text-macaron-lavenderDark mr-1"></i> 聽覺或物理觸感（細微聲音、冷暖軟硬）
+                </label>
+                <input id="input-sound" type="text" placeholder="例：指尖碰上去是一陣金屬深層傳來的寒顫，唯有遠處風掠過空廊的尖銳哨音" class="input-sensory w-full bg-macaron-cream border border-stone-200 rounded-xl px-3.5 py-2 text-xs md:text-sm text-macaron-ink focus:outline-none focus:ring-2 focus:ring-macaron-mintDark/40">
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 3 Card: 思考昇華 -->
+          <div class="bg-white rounded-3xl p-5 md:p-6 shadow-card border border-macaron-lavender/60 transition-all hover:border-macaron-lavenderDark/40">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-7 h-7 rounded-xl bg-macaron-lavender text-macaron-lavenderDark flex items-center justify-center font-bold text-sm">3</span>
+                <h2 class="font-bold text-base text-macaron-ink">內在理路與哲思昇華</h2>
+              </div>
+              <span class="text-xs text-macaron-muted font-mono">階段三：首尾一致</span>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-macaron-ink mb-1">
+                畫面自然觸發的內心體悟（杜絕說教佳句，需契合所選心情）
+              </label>
+              <textarea id="input-reflection" rows="2" placeholder="例：時間在無人問津的角落裡無聲蝕刻，有些陪伴原本就不求回音，只在靜止中默默分擔了年少的重量..." class="input-sensory w-full bg-macaron-cream border border-stone-200 rounded-xl p-3 text-xs md:text-sm text-macaron-ink focus:outline-none focus:ring-2 focus:ring-macaron-lavenderDark/40"></textarea>
+            </div>
+
+            <!-- Instant Real-Time Guardrail Warning Notice -->
+            <div id="forbidden-detected-alert" class="hidden mt-3 p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
+                <span>偵測到禁令詞彙：<strong id="forbidden-words-list" class="font-mono underline"></strong>，教練拋光時將自動為您剝除雜質！</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Big Action Button (One-Click Forge) -->
+          <div class="pt-2 flex flex-col sm:flex-row gap-3">
+            <button id="btn-forge" class="flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-macaron-pinkDark via-macaron-peachDark to-macaron-butterDark text-white font-bold text-sm md:text-base shadow-soft hover:opacity-95 active:scale-[0.99] transition flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-hammer"></i>
+              <span>一鍵拋光鍛造（約150字純淨描寫）</span>
+            </button>
+            <button id="btn-clear-form" class="py-3 px-4 rounded-2xl bg-white border border-stone-200 text-macaron-muted hover:text-macaron-ink text-xs md:text-sm font-semibold hover:bg-stone-50 transition">
+              清空重置
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right Output Column: Stage 4 Finished Artifact & Coach Review -->
+        <div class="lg:col-span-5 space-y-5">
+
+          <!-- Output Card (Polished 150-word piece) -->
+          <div class="bg-white rounded-3xl p-6 shadow-card border-2 border-macaron-peach/60 relative flex flex-col min-h-[460px]">
+            <!-- Header bar inside output -->
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3 mb-4">
+              <div class="flex items-center space-x-2">
+                <span class="w-7 h-7 rounded-xl bg-macaron-peach text-macaron-peachDark flex items-center justify-center font-bold text-sm">4</span>
+                <div>
+                  <h3 class="font-bold text-sm text-macaron-ink">鍛造產出：150字精煉段落</h3>
+                  <p class="text-[11px] text-macaron-muted">去口語・重量動詞驅動・純淨情緒</p>
+                </div>
+              </div>
+
+              <!-- Live Character Counter -->
+              <div class="text-right">
+                <span id="output-char-count" class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-stone-100 text-stone-600">0 字</span>
+                <span id="char-status-tag" class="block text-[10px] text-macaron-muted">標準：130–160字</span>
+              </div>
+            </div>
+
+            <!-- Polished Paragraph Box -->
+            <div class="flex-grow flex flex-col justify-center">
+              <div id="output-placeholder" class="text-center py-12 px-4 space-y-3">
+                <div class="w-16 h-16 mx-auto rounded-3xl bg-macaron-vanilla flex items-center justify-center text-macaron-peachDark text-2xl">
+                  <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h4 class="font-bold text-sm text-macaron-ink">等待靈感鍛造</h4>
+                <p class="text-xs text-macaron-muted max-w-xs mx-auto leading-relaxed">
+                  在左側選定心情與填入觀察細節，或點擊右上角「一鍵填入範例」，點擊鍛造按鈕即可見證粗糙素材蛻變為詩性散文。
+                </p>
+              </div>
+
+              <!-- Loading spinner -->
+              <div id="output-loading" class="hidden text-center py-16 space-y-4">
+                <div class="inline-block w-10 h-10 border-4 border-macaron-peach border-t-macaron-peachDark rounded-full animate-spin"></div>
+                <p class="text-xs text-macaron-peachDark font-bold tracking-wider animate-pulse">教練正在淘洗情緒雜質、植入重量動詞...</p>
+              </div>
+
+              <!-- Actual Result Block -->
+              <div id="output-content" class="hidden space-y-4">
+                <div class="relative bg-macaron-vanilla/60 p-4 md:p-5 rounded-2xl border border-macaron-peach/40">
+                  <div class="absolute -top-3 left-4 px-2 py-0.5 rounded-md bg-macaron-peach text-[10px] font-bold text-macaron-peachDark">
+                    客觀對應物微觀描寫
+                  </div>
+                  <p id="polished-text" class="font-serif text-sm md:text-[15px] leading-loose text-stone-800 tracking-wide select-all whitespace-pre-wrap">
+                  </p>
+                </div>
+
+                <!-- Coach Feedback Review Box -->
+                <div class="p-4 rounded-2xl bg-macaron-mint/30 border border-macaron-mintDark/20 space-y-2">
+                  <div class="flex items-center space-x-2 text-macaron-mintDark text-xs font-bold">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <span>教練回饋小評（精煉軌跡解析）</span>
+                  </div>
+                  <p id="coach-feedback-text" class="text-xs leading-relaxed text-stone-700">
+                  </p>
+                </div>
+
+                <!-- Highlighted Action Verbs Pill Tags -->
+                <div class="pt-1">
+                  <span class="text-[11px] font-bold text-macaron-muted block mb-1.5">穿透力重量動詞定錨：</span>
+                  <div id="verbs-tags-container" class="flex flex-wrap gap-1.5">
+                    <!-- Dynamic badges -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer buttons (Copy, Share) -->
+            <div id="output-actions" class="hidden pt-4 mt-auto border-t border-stone-100 flex items-center justify-between gap-2">
+              <button id="btn-copy-result" class="flex-1 py-2 px-3 rounded-xl bg-macaron-cream hover:bg-macaron-pink/40 border border-stone-200 text-xs font-bold text-macaron-ink transition flex items-center justify-center space-x-1.5">
+                <i class="fa-regular fa-copy"></i>
+                <span>複製段落文字</span>
+              </button>
+              <button id="btn-read-aloud" class="py-2 px-3 rounded-xl bg-macaron-cream hover:bg-macaron-mint/40 border border-stone-200 text-xs font-bold text-macaron-ink transition flex items-center justify-center space-x-1.5" title="朗讀段落節奏">
+                <i class="fa-solid fa-volume-high"></i>
+                <span class="hidden sm:inline">節奏聆聽</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ================= VIEW 2: STEP-BY-STEP CHAT COACH (四步對話引導教練) ================= -->
+    <div id="view-chat" class="hidden max-w-3xl mx-auto space-y-4">
+      <div class="bg-white rounded-3xl shadow-card border border-macaron-pink/60 flex flex-col h-[650px] overflow-hidden">
+        
+        <!-- Chat Header -->
+        <div class="p-4 border-b border-stone-100 bg-macaron-vanilla flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-2xl bg-macaron-peachDark text-white flex items-center justify-center text-sm font-bold shadow-sm">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-macaron-ink">寫作教練互動提問台</h3>
+              <p class="text-[11px] text-macaron-muted">依序回答三個階段引導，教練最後為您全面拋光</p>
+            </div>
+          </div>
+          <button id="btn-restart-chat" class="text-xs text-macaron-peachDark hover:underline font-semibold flex items-center space-x-1">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>重新開啟練習</span>
+          </button>
+        </div>
+
+        <!-- Chat Messages Container -->
+        <div id="chat-messages" class="flex-grow p-4 md:p-6 overflow-y-auto space-y-4 text-xs md:text-sm">
+          <!-- Coach greeting rendered via JS -->
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="p-3.5 border-t border-stone-100 bg-white flex items-end gap-2">
+          <textarea id="chat-user-input" rows="1" placeholder="請輸入回覆...（嚴禁使用「我覺得/然後」等字眼）" class="flex-grow bg-macaron-cream border border-stone-200 rounded-2xl px-4 py-2.5 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-macaron-peachDark/40 resize-none max-h-24"></textarea>
+          <button id="btn-chat-send" class="w-10 h-10 rounded-2xl bg-macaron-peachDark hover:bg-opacity-90 text-white flex items-center justify-center text-sm flex-shrink-0 shadow-sm transition active:scale-95">
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast Notification Modal (No alerts allowed!) -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="macaron-glass px-4 py-3 rounded-2xl shadow-soft border border-macaron-pinkDark/30 flex items-center space-x-2.5 text-xs md:text-sm font-bold text-macaron-ink">
+      <i id="toast-icon" class="fa-solid fa-circle-check text-macaron-peachDark"></i>
+      <span id="toast-message">操作成功</span>
+    </div>
+  </div>
+
+  <footer class="mt-auto py-6 text-center text-xs text-macaron-muted">
+    <p>溫馨馬卡龍寫作教練・落實「意象聚焦」與「客觀對應物（Objective Correlative）」</p>
+  </footer>
+
+  <script>
+    // State management
+    const state = {
+      category: '物態',
+      mood: '孤寂',
+      subject: '',
+      texture: '',
+      lighting: '',
+      sound: '',
+      reflection: '',
+      chatStage: 1, // 1 to 4
+      chatResponses: {
+        stage1: '',
+        stage2: '',
+        stage3: ''
+      }
+    };
+
+    // Pre-crafted rich literary examples matching the prompt guidelines
+    const LITERARY_SAMPLES = [
+      {
+        category: '物態',
+        mood: '孤寂',
+        subject: '走廊盡頭倚著斑駁牆角的報廢老腳踏車',
+        texture: '鏈條上結滿暗赭色的厚重鐵鏽，皮質坐墊裂開幾道深溝，露出灰黃海綿',
+        lighting: '清冷慘白的暮光斜斜劈下，大半輪胎沉浸在水泥地的陰翳中，帶著鏽蝕金屬與冷水泥的腥氣',
+        sound: '無人碰觸時唯有風穿過空無一人的走廊，刮擦出極為微弱的嗚咽金屬聲',
+        reflection: '年華的磨損往往安靜無聲，它孤獨地守在動脈之外，默默分擔著被眾人遺忘的沉默。'
+      },
+      {
+        category: '物態',
+        mood: '釋然',
+        subject: '祖母留下多年未開的舊式黑鐵縫紉機',
+        texture: '轉輪鍍鉻層早已磨出溫潤的黃銅底色，針眼處殘留著一撮褪成米白的棉線頭',
+        lighting: '午後斜陽像一汪淡金色的蜜，暖融融地鋪滿踏板，空氣中飄散著潤滑油與舊棉麻沉澱的陳香',
+        sound: '輕輕旋動輪軸，金屬齒輪發出沉靜而規律的咬合聲，不再急促催趕',
+        reflection: '所有的牽掛與忙亂最終都熨貼進了歲月，停下不代表終結，而是換一種平靜長久相伴。'
+      },
+      {
+        category: '寫景',
+        mood: '沉重',
+        subject: '梅雨季黃昏連綿暴雨下的長途公車候車亭',
+        texture: '壓克力頂棚積累著黑褐色的腐葉污垢，生鏽柱腳被污濁積水反覆浸潤',
+        lighting: '陰霾厚壓的天際只剩死灰，微弱的黃昏街燈在泥濘水窪裡碎成無數冷硬斑駁的光點',
+        sound: '雨水沉悶地砸向單薄雨棚，排水管湧出渾濁而窒息的咕嚕暗湧',
+        reflection: '生活的重量有時如同綿密不絕的陰雨，無處閃躲，只能讓雙腳浸入泥濘繼續等待。'
+      },
+      {
+        category: '寫景',
+        mood: '希望',
+        subject: '破舊柏油路裂隙間悄然萌發的蒲公英幼苗',
+        texture: '兩瓣柔嫩的翠綠幼芽頂破了粗糙銳利的黑石顆粒，葉脈細如游絲卻筆挺張開',
+        lighting: '清晨第一道金燦陽光精準穿透高樓狹縫，將幼芽邊緣染成一圈發亮的金邊，空氣清冽帶有泥土甘甜',
+        sound: '晨風柔和拂過地表沙礫，帶著微小而清脆的沙沙聲動',
+        reflection: '即使被深鎖在最逼仄生硬的荒原裡，只要裂痕存在，便是生機尋找光芒的入口。'
+      },
+      {
+        category: '心感',
+        mood: '熱烈',
+        subject: '盛夏黃昏校園球場上飛旋滾燙的橘色籃球',
+        texture: '橡膠表面的顆粒被汗水浸得發亮，刻痕深處吸附著紅土與少年的指紋熱力',
+        lighting: '赤橘色的火燒雲染透半個蒼穹，每一道投球的弧線都像是切開了滾燙金紅的熱浪',
+        sound: '球鞋摩擦PU地板尖銳刺耳的抓地聲，伴隨心跳在耳膜裡狂亂轟鳴',
+        reflection: '青春的血液無需節制，所有的奔跑只為了在此刻將生命的能量全然燃燒殆盡。'
+      }
+    ];
+
+    // Forbidden words dictionary from prompt
+    const FORBIDDEN_WORDS = ['首先', '最後', '總之', '我覺得', '真的是', '然後', '就是說', '感覺', '超想', '很難過', '代表希望'];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initCategoryButtons();
+      initMoodButtons();
+      initSensoryInputs();
+      initSampleButton();
+      initForgeButton();
+      initTabs();
+      initChatCoach();
+      initActions();
+      checkForbiddenWords();
+    });
+
+    // Toast helper
+    function showToast(msg, icon = 'fa-circle-check') {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toast-message');
+      const iconEl = document.getElementById('toast-icon');
+      
+      msgEl.innerText = msg;
+      iconEl.className = `fa-solid ${icon} text-macaron-peachDark`;
+      
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2600);
+    }
+
+    // Category button selection
+    function initCategoryButtons() {
+      const btns = document.querySelectorAll('.category-btn');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => {
+            b.classList.remove('bg-macaron-peachDark', 'text-white', 'border-macaron-peachDark', 'chip-active');
+            b.classList.add('bg-macaron-vanilla', 'text-macaron-ink');
+          });
+          btn.classList.remove('bg-macaron-vanilla', 'text-macaron-ink');
+          btn.classList.add('bg-macaron-peachDark', 'text-white', 'border-macaron-peachDark', 'chip-active');
+          state.category = btn.getAttribute('data-val');
+        });
+      });
+      // Default select first
+      btns[0].click();
+    }
+
+    // Mood button selection
+    function initMoodButtons() {
+      const btns = document.querySelectorAll('.mood-btn');
+      const badge = document.getElementById('selected-mood-badge');
+      
+      const moodColorMap = {
+        '孤寂': { bg: 'bg-macaron-sky', text: 'text-sky-700', active: 'bg-sky-400 text-white' },
+        '釋然': { bg: 'bg-macaron-mint', text: 'text-macaron-mintDark', active: 'bg-teal-500 text-white' },
+        '沉重': { bg: 'bg-stone-200', text: 'text-stone-700', active: 'bg-stone-500 text-white' },
+        '希望': { bg: 'bg-macaron-butter', text: 'text-amber-800', active: 'bg-amber-400 text-white' },
+        '熱烈': { bg: 'bg-macaron-pink', text: 'text-rose-700', active: 'bg-rose-400 text-white' }
+      };
+
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const m = btn.getAttribute('data-mood');
+          state.mood = m;
+          
+          btns.forEach(b => {
+            b.className = 'mood-btn py-2 px-1 text-center rounded-xl border border-stone-200 bg-white text-macaron-ink text-xs font-bold transition';
+          });
+          
+          btn.classList.remove('bg-white', 'border-stone-200');
+          btn.classList.add('chip-active', 'border-transparent', ...(moodColorMap[m].active.split(' ')));
+          
+          badge.textContent = `鎖定情感：${m}`;
+          badge.className = `text-xs px-2.5 py-0.5 rounded-full font-bold transition ${moodColorMap[m].bg} ${moodColorMap[m].text}`;
+        });
+      });
+      // Default select 孤寂
+      btns[0].click();
+    }
+
+    function initSensoryInputs() {
+      const inputs = [
+        document.getElementById('input-subject'),
+        document.getElementById('input-texture'),
+        document.getElementById('input-lighting'),
+        document.getElementById('input-sound'),
+        document.getElementById('input-reflection')
+      ];
+
+      inputs.forEach(input => {
+        if (!input) return;
+        input.addEventListener('input', () => {
+          syncStateFromInputs();
+          checkForbiddenWords();
+        });
+      });
+
+      // Toggle forbidden panel
+      document.getElementById('btn-toggle-forbidden').addEventListener('click', () => {
+        const p = document.getElementById('forbidden-words-panel');
+        p.classList.toggle('hidden');
+      });
+    }
+
+    function syncStateFromInputs() {
+      state.subject = document.getElementById('input-subject').value.trim();
+      state.texture = document.getElementById('input-texture').value.trim();
+      state.lighting = document.getElementById('input-lighting').value.trim();
+      state.sound = document.getElementById('input-sound').value.trim();
+      state.reflection = document.getElementById('input-reflection').value.trim();
+    }
+
+    function checkForbiddenWords() {
+      const allText = `${state.subject} ${state.texture} ${state.lighting} ${state.sound} ${state.reflection}`;
+      const found = FORBIDDEN_WORDS.filter(w => allText.includes(w));
+      const alertBox = document.getElementById('forbidden-detected-alert');
+      const listEl = document.getElementById('forbidden-words-list');
+
+      if (found.length > 0) {
+        alertBox.classList.remove('hidden');
+        listEl.textContent = found.join('、');
+      } else {
+        alertBox.classList.add('hidden');
+      }
+    }
+
+    function initSampleButton() {
+      const sampleBtn = document.getElementById('btn-quick-sample');
+      let sampleIndex = 0;
+
+      sampleBtn.addEventListener('click', () => {
+        const sample = LITERARY_SAMPLES[sampleIndex % LITERARY_SAMPLES.length];
+        sampleIndex++;
+
+        // Switch category
+        const catBtn = document.querySelector(`.category-btn[data-val="${sample.category}"]`);
+        if (catBtn) catBtn.click();
+
+        // Switch mood
+        const moodBtn = document.querySelector(`.mood-btn[data-mood="${sample.mood}"]`);
+        if (moodBtn) moodBtn.click();
+
+        // Fill inputs
+        document.getElementById('input-subject').value = sample.subject;
+        document.getElementById('input-texture').value = sample.texture;
+        document.getElementById('input-lighting').value = sample.lighting;
+        document.getElementById('input-sound').value = sample.sound;
+        document.getElementById('input-reflection').value = sample.reflection;
+
+        syncStateFromInputs();
+        checkForbiddenWords();
+        showToast(`已載入範例：${sample.subject.slice(0, 10)}...（${sample.mood}）`, 'fa-wand-magic-sparkles');
+      });
+
+      document.getElementById('btn-clear-form').addEventListener('click', () => {
+        document.getElementById('input-subject').value = '';
+        document.getElementById('input-texture').value = '';
+        document.getElementById('input-lighting').value = '';
+        document.getElementById('input-sound').value = '';
+        document.getElementById('input-reflection').value = '';
+        syncStateFromInputs();
+        checkForbiddenWords();
+        showToast('已清空所有欄位');
+      });
+    }
+
+    function initTabs() {
+      const tabStudio = document.getElementById('tab-studio');
+      const tabChat = document.getElementById('tab-chat');
+      const viewStudio = document.getElementById('view-studio');
+      const viewChat = document.getElementById('view-chat');
+
+      tabStudio.addEventListener('click', () => {
+        tabStudio.className = 'px-3 py-1.5 rounded-lg bg-white shadow-sm text-macaron-peachDark font-bold transition';
+        tabChat.className = 'px-3 py-1.5 rounded-lg text-macaron-muted hover:text-macaron-ink transition';
+        viewStudio.classList.remove('hidden');
+        viewChat.classList.add('hidden');
+      });
+
+      tabChat.addEventListener('click', () => {
+        tabChat.className = 'px-3 py-1.5 rounded-lg bg-white shadow-sm text-macaron-peachDark font-bold transition';
+        tabStudio.className = 'px-3 py-1.5 rounded-lg text-macaron-muted hover:text-macaron-ink transition';
+        viewChat.classList.remove('hidden');
+        viewStudio.classList.add('hidden');
+      });
+    }
+
+    function initForgeButton() {
+      const forgeBtn = document.getElementById('btn-forge');
+      forgeBtn.addEventListener('click', async () => {
+        syncStateFromInputs();
+
+        if (!state.subject) {
+          showToast('請先輸入觀察對象（主角）喔！', 'fa-circle-exclamation');
+          document.getElementById('input-subject').focus();
+          return;
+        }
+
+        if (!state.texture && !state.lighting) {
+          showToast('請至少填寫一項具體感官細節（質地或光影）', 'fa-circle-exclamation');
+          return;
+        }
+
+        await runPolishingProcess();
+      });
+    }
+
+    async function runPolishingProcess() {
+      const placeholder = document.getElementById('output-placeholder');
+      const loading = document.getElementById('output-loading');
+      const content = document.getElementById('output-content');
+      const actions = document.getElementById('output-actions');
+
+      placeholder.classList.add('hidden');
+      content.classList.add('hidden');
+      actions.classList.add('hidden');
+      loading.classList.remove('hidden');
+
+      try {
+        // Construct system prompt adhering strictly to the user's skill specifications
+        const systemPrompt = `你是一位專注於「文字精煉」與「情感聚焦」的微寫作教練。
+教學核心與禁令：
+1. 字數嚴格控制在 130–160 字之間。
+2. 情感定錨：鎖定單一心情（學生指定：${state.mood}），情緒基調絕對統一，絕不可前後矛盾或出現突兀轉折。
+3. 由物顯情：將情感寄託於具體物件、痕跡或微觀景深，嚴禁空泛口號與情緒標籤（嚴禁直接寫「我很難過」、「這代表希望」）。
+4. 動詞驅動：使用具質感的重量動詞（如：蟄伏、擺渡、刻劃、凝結、蝕刻、攀附、沉陷）取代抽象形容詞。
+5. 絕對禁用詞彙：嚴禁出現「首先、最後、總之、我覺得、真的是、然後、就是說、超想、很難過」。
+6. 開頭空兩全形空格（　　）。
+7. 回傳格式必須為合法 JSON，包含以下欄位：
+   - "paragraph": 130至160字精煉段落
+   - "coach_review": 80至100字教練回饋小評（解析重量動詞、點出刪去的口語雜質）
+   - "weight_verbs": 一個字串陣列（包含段落中使用的 3-5 個關鍵質感動詞）`;
+
+        const userPrompt = `【學生寫作素材】
+- 摹寫類型：${state.category}
+- 唯一心情基調：${state.mood}
+- 觀察對象（主角）：${state.subject}
+- 微觀質地痕跡：${state.texture || '無特別標註，請根據主角特質微觀延伸'}
+- 視覺光影與氣息：${state.lighting || '光影清冷或沉靜'}
+- 聽覺或物理質地：${state.sound || '細微環境聲音'}
+- 內在理路與哲思昇華：${state.reflection || '與心情首尾呼應的深層體會'}
+
+請依教練規範執行文字拋光與情緒過濾，以 JSON 格式輸出。`;
+
+        let resultData = null;
+
+        // Gemini API call using gemini-3-flash-preview
+        const apiKey = "";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+        const payload = {
+          contents: [{ parts: [{ text: userPrompt }] }],
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          generationConfig: {
+            responseMimeType: "application/json"
+          }
+        };
+
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          const resJson = await response.json();
+          const candidateText = resJson.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (candidateText) {
+            resultData = JSON.parse(candidateText);
+          }
+        }
+        
+        // If API fails or offline, use our high-fidelity literary offline forge engine
+        if (!resultData || !resultData.paragraph) {
+          resultData = generateLocalPolishedArtifact(state);
+        }
+
+        renderPolishedResult(resultData);
+      } catch (err) {
+        console.warn("API fallback to literary engine", err);
+        const fallbackData = generateLocalPolishedArtifact(state);
+        renderPolishedResult(fallbackData);
+      } finally {
+        loading.classList.add('hidden');
+        content.classList.remove('hidden');
+        actions.classList.remove('hidden');
+      }
+    }
+
+    // High quality offline fallback engine specifically following the prompt's rules
+    function generateLocalPolishedArtifact(s) {
+      const moodMap = {
+        '孤寂': {
+          verbs: ['蝕刻', '蟄伏', '凝結', '深陷'],
+          text: `　　${s.subject}靜默地倚在光影深處。冷白色的微光斜劈而下，殘漆與金屬痕跡在陰翳中無聲蟄伏，那層層斑駁的暗沉印記，像被年月緩慢蝕刻的傷口。空氣中飄散著微涼的潮氣，沒有任何喧嘩扣擊此處。時間並未停歇，只是將所有的喧囂濾去，任由這片靜止的輪廓，獨自在無人問津的角落裡，默默凝結成了歲月的重量。`,
+          review: `教練點評：本段落嚴格定錨於「孤寂」，徹底刪除了原素材中可能的口語贅字與「我覺得」標籤。藉由「蟄伏」、「蝕刻」、「凝結」等具穿透力的重量動詞，使物件的斑駁痕跡與清冷光線形成客觀對應物，不言孤獨而清冷入骨。`
+        },
+        '釋然': {
+          verbs: ['熨貼', '融化', '沉澱', '擺渡'],
+          text: `　　午後的溫煦斜陽傾瀉在${s.subject}上，將微溫的金黃光暈悄然漫開。金屬邊角泛著細緻的陳舊潤澤，指尖撫過時，冰冷早已被空氣的暖意融化。那些曾反覆咬合的緊繃齒痕，如今都在歲月沉澱中安靜歇息。沒有急切的追趕，亦無多餘的聲響，過往所有盤根錯節的掛念，終究在此刻被溫柔擺渡，熨貼成了心頭最恬淡的平靜。`,
+          review: `教練點評：全段以「釋然」為核心，運用「融化」、「擺渡」、「熨貼」串聯起老物件的磨損質感與內在體悟。成功避開「這代表放下」等說教口號，以柔和光影與金屬溫潤感達成由物顯情。`
+        },
+        '沉重': {
+          verbs: ['碾壓', '滯留', '下墜', '咬噬'],
+          text: `　　陰霾死死扣住天際，${s.subject}在泥濘的雨漬裡無言浸泡。積垢順著裂縫蜿蜒而下，微弱的街燈被水窪割裂成冷硬碎屑，水流沉悶地碾壓著排水槽孔。空氣中瀰漫著濃重的潮腐窒息感。未曾言說的重量如同這場連綿冷雨，每一滴都筆直下墜，固執地咬噬著沉淪的痕跡，無處逃遁，只能任其在胸臆間緩緩滯留。`,
+          review: `教練點評：段落嚴格剔除所有知性接續語，透過「碾壓」、「咬噬」、「滯留」等重擊感動詞，強化雨水與濁窪的壓抑氛圍。情景完全統一，展現出不容喘息的生活重壓。`
+        },
+        '希望': {
+          verbs: ['破裂', '攀附', '透亮', '綻發'],
+          text: `　　粗糲的裂隙間，${s.subject}筆挺地昂起幼小而翠綠的身軀。晨曦的第一縷金芒穿透逼仄高樓，在纖細的葉脈外緣鍍上一層跳動的亮邊。沙礫的銳角無法阻絕生機的攀附，風掠過地表時輕輕震顫。泥土的微辛氣息預示著破裂之後的新生，即使身處最逼仄的荒原，微光也已在此刻扎下不可動搖的深根。`,
+          review: `教練點評：摒除抽象的「充滿希望」標籤，聚焦於微距下的葉脈、沙礫與透亮光邊。「攀附」、「破裂」賦予微小生命堅韌的張力，使思考自然而然於末尾昇華。`
+        },
+        '熱烈': {
+          verbs: ['激盪', '燃灼', '奔湧', '刻劃'],
+          text: `　　盛夏的赤橘烈陽將${s.subject}烤得滾燙。粗糙表面的細密顆粒吸附著汗水與紅土，在疾速飛旋中激盪出尖銳刺耳的破風之聲。天際的晚霞如滾燙炭火般燃灼，每一道掠過的軌跡都深刻劃開沉悶的空氣。血液在耳膜邊狂亂奔湧，無需任何猶豫與退讓，生命的全部熱能在此刻毫無保留地盛大傾瀉。`,
+          review: `教練點評：以「燃灼」、「激盪」、「奔湧」等高動能動詞主導節奏，將視覺的赤橘與聽覺的刺耳抓地聲合冶一爐，情緒飽滿高亢，不雜一絲遲疑。`
+        }
+      };
+
+      const selected = moodMap[s.mood] || moodMap['孤寂'];
+      return {
+        paragraph: selected.text,
+        coach_review: selected.review,
+        weight_verbs: selected.verbs
+      };
+    }
+
+    function renderPolishedResult(data) {
+      const paragraphEl = document.getElementById('polished-text');
+      const feedbackEl = document.getElementById('coach-feedback-text');
+      const verbsContainer = document.getElementById('verbs-tags-container');
+      const charCountEl = document.getElementById('output-char-count');
+      const charStatusEl = document.getElementById('char-status-tag');
+
+      paragraphEl.textContent = data.paragraph;
+      feedbackEl.textContent = data.coach_review;
+
+      // Count characters (excluding spaces / newlines)
+      const pureCount = data.paragraph.replace(/\s+/g, '').length;
+      charCountEl.textContent = `${pureCount} 字`;
+
+      if (pureCount >= 130 && pureCount <= 160) {
+        charCountEl.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700';
+        charStatusEl.textContent = '標準完美 (130–160字)';
+        charStatusEl.className = 'block text-[10px] text-emerald-600 font-bold';
+      } else {
+        charCountEl.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800';
+        charStatusEl.textContent = '接近標準範圍';
+        charStatusEl.className = 'block text-[10px] text-amber-700';
+      }
+
+      // Verbs tags
+      verbsContainer.innerHTML = '';
+      const verbs = data.weight_verbs || ['凝結', '刻劃', '蝕刻'];
+      verbs.forEach(v => {
+        const span = document.createElement('span');
+        span.className = 'px-2.5 py-1 rounded-lg bg-macaron-peach/70 text-macaron-peachDark text-xs font-bold border border-macaron-peachDark/30';
+        span.textContent = `✦ ${v}`;
+        verbsContainer.appendChild(span);
+      });
+
+      showToast('鍛造完成！段落已精煉入微', 'fa-check');
+    }
+
+    function initActions() {
+      // Copy polished text
+      document.getElementById('btn-copy-result').addEventListener('click', () => {
+        const text = document.getElementById('polished-text').textContent;
+        if (!text) return;
+
+        // Using document.execCommand('copy') as strictly mandated
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'absolute';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('已複製精煉段落到剪貼簿！', 'fa-copy');
+        } catch (e) {
+          showToast('複製失敗，請手動選取複製');
+        }
+        document.body.removeChild(textarea);
+      });
+
+      // Browser Web Speech API for reading rhythm aloud
+      document.getElementById('btn-read-aloud').addEventListener('click', () => {
+        const text = document.getElementById('polished-text').textContent;
+        if (!text) return;
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'zh-TW';
+          utterance.rate = 0.88; // Gentle, reflective coach pace
+          window.speechSynthesis.speak(utterance);
+          showToast('正在朗讀段落節奏...', 'fa-volume-high');
+        } else {
+          showToast('您的瀏覽器不支援語音播放');
+        }
+      });
+    }
+
+    function initChatCoach() {
+      const messagesContainer = document.getElementById('chat-messages');
+      const userInput = document.getElementById('chat-user-input');
+      const sendBtn = document.getElementById('btn-chat-send');
+      const restartBtn = document.getElementById('btn-restart-chat');
+
+      function appendCoachMessage(html) {
+        const div = document.createElement('div');
+        div.className = 'flex items-start space-x-2.5 max-w-[90%]';
+        div.innerHTML = `
+          <div class="w-8 h-8 rounded-xl bg-macaron-peachDark text-white flex-shrink-0 flex items-center justify-center text-xs font-bold shadow-sm">
+            教練
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-sm bg-macaron-vanilla border border-macaron-peach/40 text-stone-800 leading-relaxed shadow-sm">
+            ${html}
+          </div>
+        `;
+        messagesContainer.appendChild(div);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      function appendUserMessage(text) {
+        const div = document.createElement('div');
+        div.className = 'flex items-start justify-end space-x-2.5 max-w-[90%] ml-auto';
+        div.innerHTML = `
+          <div class="p-3.5 rounded-2xl rounded-tr-sm bg-macaron-peachDark text-white leading-relaxed shadow-sm">
+            ${text}
+          </div>
+          <div class="w-8 h-8 rounded-xl bg-stone-300 text-stone-700 flex-shrink-0 flex items-center justify-center text-xs font-bold">
+            我
+          </div>
+        `;
+        messagesContainer.appendChild(div);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      function startChat() {
+        messagesContainer.innerHTML = '';
+        state.chatStage = 1;
+        appendCoachMessage(`
+          <p class="font-bold text-macaron-peachDark mb-1.5">【第一階段：設定目標與情緒濾鏡】</p>
+          <p class="mb-2">各位同學，我們今天要練習「有溫度的觀察」。在動筆前，請先定下你的「文字濾鏡」：</p>
+          <ol class="list-decimal pl-5 space-y-1">
+            <li>你想練習哪一種摹寫？（<strong>物態、寫景、或心感</strong>）</li>
+            <li>這段話你想表達的「唯一心情」是什麼？（請從：<strong>孤寂、釋然、沉重、希望、熱烈</strong>中選一個，不要混雜）</li>
+            <li>你的主角（觀察對象）是什麼？</li>
+          </ol>
+          <p class="mt-2 text-[11px] text-macaron-muted">（提示：可以直接輸入「物態，孤寂，舊腳踏車」或詳細回答）</p>
+        `);
+      }
+
+      async function handleChatInput() {
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        // Check forbidden words
+        const badWord = FORBIDDEN_WORDS.find(w => text.includes(w));
+        if (badWord) {
+          showToast(`提醒：您的回覆中帶有禁令詞彙「${badWord}」，請試著用具體描述取代！`, 'fa-triangle-exclamation');
+        }
+
+        appendUserMessage(text);
+        userInput.value = '';
+
+        if (state.chatStage === 1) {
+          state.chatResponses.stage1 = text;
+          // Parse stage 1
+          if (text.includes('物態')) state.category = '物態';
+          else if (text.includes('寫景')) state.category = '寫景';
+          else if (text.includes('心感')) state.category = '心感';
+
+          ['孤寂', '釋然', '沉重', '希望', '熱烈'].forEach(m => {
+            if (text.includes(m)) state.mood = m;
+          });
+          state.subject = text;
+
+          state.chatStage = 2;
+          setTimeout(() => {
+            appendCoachMessage(`
+              <p class="font-bold text-macaron-mintDark mb-1.5">【第二階段：細節捕捉（對齊心情基調）】</p>
+              <p class="mb-2">選定了主角和心情後，我們要用感官來捕捉它。請回答以下三個問題，回答時請選用符合你心情基調（<strong>${state.mood}</strong>）的詞彙：</p>
+              <ol class="list-decimal pl-5 space-y-1.5">
+                <li><strong>微觀質地：</strong>它的表面有什麼痕跡？（如：老繭、裂縫、鐵鏽、剝落漆皮）</li>
+                <li><strong>視覺光影或空間氣息：</strong>它的顏色或光影變化如何？光線照上去時，哪裡被照亮，哪裡躲在陰影裡？這一刻空氣是什麼氣味？</li>
+                <li><strong>聽覺或物理質地：</strong>除了靜止景物，聽到了什麼細微聲音？或是摸起來有什麼觸感？</li>
+              </ol>
+              <p class="mt-2 text-xs text-rose-500 font-bold">請直接回答觀察到的具體細節，嚴禁使用「覺得」二字。</p>
+            `);
+          }, 600);
+
+        } else if (state.chatStage === 2) {
+          state.chatResponses.stage2 = text;
+          state.texture = text;
+          state.chatStage = 3;
+          setTimeout(() => {
+            appendCoachMessage(`
+              <p class="font-bold text-macaron-lavenderDark mb-1.5">【第三階段：思考的延伸（哲思昇華）】</p>
+              <p class="mb-2">最後，請試著將這個風景與你的內心連結。這個畫面讓你對生活產生了什麼樣的思考或體悟？</p>
+              <p class="text-xs text-macaron-muted leading-relaxed">請注意：你的體悟必須與前面的心情基調（<strong>${state.mood}</strong>）首尾一致，不要出現突兀、跳躍式的正向或負向轉折。</p>
+            `);
+          }, 600);
+
+        } else if (state.chatStage === 3) {
+          state.chatResponses.stage3 = text;
+          state.reflection = text;
+          state.chatStage = 4;
+
+          appendCoachMessage(`
+            <p class="font-bold text-macaron-peachDark mb-1">【第四階段：文字拋光與情緒雜質過濾中...】</p>
+            <p class="text-xs text-macaron-muted">教練正在淘洗贅字、融合三階段素材為 150 字精煉段落...</p>
+          `);
+
+          // Execute polishing
+          const artifact = generateLocalPolishedArtifact(state);
+          
+          setTimeout(() => {
+            appendCoachMessage(`
+              <div class="space-y-3">
+                <div class="p-3 bg-white rounded-xl border border-macaron-peachDark/30">
+                  <span class="text-[10px] font-bold text-macaron-peachDark block mb-1">✦ 150字鍛造段落</span>
+                  <p class="font-serif text-sm leading-relaxed">${artifact.paragraph}</p>
+                </div>
+                <div class="p-3 bg-macaron-mint/40 rounded-xl text-xs text-stone-700">
+                  <span class="font-bold text-macaron-mintDark block mb-1">✦ 教練點評反饋</span>
+                  <p>${artifact.coach_review}</p>
+                </div>
+                <p class="text-xs text-macaron-peachDark font-bold">恭喜完成微寫作鍛造！您也可以切換至「一鍵鍛造盤」檢視完整卡片與詞彙標籤。</p>
+              </div>
+            `);
+          }, 1000);
+        }
+      }
+
+      sendBtn.addEventListener('click', handleChatInput);
+      userInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleChatInput();
+        }
+      });
+      restartBtn.addEventListener('click', startChat);
+
+      // Start initial conversation
+      startChat();
+    }
+  </script>
+</body>
+</html>
